@@ -14,7 +14,7 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
     locales \
     netcat-openbsd \
     python${PYTHON_VERSION} \
-    python${PYTHON_VERSION}-distutils \
+    python3-distutils \
     && locale-gen ${LOCALE}
 
 # Crear directorios necesarios y establecer permisos
