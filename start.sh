@@ -4,9 +4,7 @@
 echo "Variables de entorno:"
 echo "PGHOST: ${PGHOST}"
 echo "PGPORT: ${PGPORT}"
-echo "PGUSER: ${PGUSER}"
 echo "PGDATABASE: ${PGDATABASE}"
-echo "PGPASSWORD: ${PGPASSWORD:0:5}..." # Solo mostramos los primeros 5 caracteres por seguridad
 
 # Crear el archivo de configuración dinámicamente
 cat > /etc/odoo/odoo.conf << EOF
@@ -20,8 +18,8 @@ log_handler = [':DEBUG']
 [db]
 host = ${PGHOST}
 port = ${PGPORT}
-user = ${PGUSER}
-password = ${PGPASSWORD}
+user = facu
+password = tu_nueva_contraseña
 db_name = ${PGDATABASE}
 sslmode = require
 EOF
@@ -33,5 +31,5 @@ chmod 644 /etc/odoo/odoo.conf
 echo "Contenido del archivo de configuración (sin contraseña):"
 sed 's/password = .*/password = ****/' /etc/odoo/odoo.conf
 
-# Ejecutar Odoo con el nombre de base de datos explícito
-exec odoo -c /etc/odoo/odoo.conf --http-interface=0.0.0.0 --http-port=8069 --no-cron --log-level=debug --db_host=${PGHOST} --db_port=${PGPORT} --db_user=${PGUSER} --db_password=${PGPASSWORD} --db_name=${PGDATABASE} --db_sslmode=require --database=${PGDATABASE} 
+# Ejecutar Odoo con el usuario facu
+exec odoo -c /etc/odoo/odoo.conf --http-interface=0.0.0.0 --http-port=8069 --no-cron --log-level=debug --db_host=${PGHOST} --db_port=${PGPORT} --db_user=facu --db_password=tu_nueva_contraseña --db_name=${PGDATABASE} --db_sslmode=require --database=${PGDATABASE} 
