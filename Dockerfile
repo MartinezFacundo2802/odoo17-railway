@@ -17,9 +17,11 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
     netcat-openbsd \
     python${PYTHON_VERSION} \
     python3-distutils \
+    python3-pip \
     && locale-gen ${LOCALE} \
     && ln -sf /usr/bin/python${PYTHON_VERSION} /usr/bin/python3 \
-    && ln -sf /usr/bin/python${PYTHON_VERSION} /usr/bin/python
+    && ln -sf /usr/bin/python${PYTHON_VERSION} /usr/bin/python \
+    && pip3 install odoo==17.0
 
 # Crear directorios necesarios y establecer permisos
 RUN mkdir -p /etc/odoo && \
