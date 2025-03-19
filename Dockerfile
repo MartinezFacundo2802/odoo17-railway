@@ -3,6 +3,9 @@ FROM odoo:17
 # Copiar archivos de configuración
 COPY config/odoo.conf /etc/odoo/odoo.conf
 
+# Cambiar a root para manejar permisos
+USER root
+
 # Crear directorios necesarios y establecer permisos
 RUN mkdir -p /mnt/extra-addons && \
     mkdir -p /var/lib/odoo && \
@@ -23,8 +26,8 @@ ENV DB_NAME=${PGDATABASE}
 ENV DB_USER=${PGUSER}
 ENV DB_PASSWORD=${PGPASSWORD}
 
-# Cambiar al usuario odoo
+# Volver al usuario odoo
 USER odoo
 
 # Comando por defecto
-CMD ["odoo", "-c", "/etc/odoo/odoo.conf", "--log-level=debug"] 
+CMD ["odoo", "-c", "/etc/odoo/odoo.conf", "--log-level=debug", "--http-interface=0.0.0.0"] 
