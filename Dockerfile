@@ -4,8 +4,10 @@ FROM odoo:17
 USER root
 RUN mkdir -p /etc/odoo && \
     mkdir -p /var/log/odoo && \
+    mkdir -p /var/lib/odoo && \
     chown -R odoo:odoo /etc/odoo && \
-    chown -R odoo:odoo /var/log/odoo
+    chown -R odoo:odoo /var/log/odoo && \
+    chown -R odoo:odoo /var/lib/odoo
 
 # Copiar archivos de configuración
 COPY start.sh /start.sh
