@@ -32,7 +32,7 @@ echo "=== Creando archivo de configuración ==="
 cat > /etc/odoo/odoo.conf << EOF
 [options]
 admin_passwd = admin
-addons_path = /usr/lib/python3/dist-packages/odoo/addons
+addons_path = /usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons
 log_level = debug
 logfile = /var/log/odoo/odoo.log
 log_handler = [':DEBUG']
