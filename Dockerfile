@@ -20,5 +20,5 @@ EXPOSE 8069
 # Cambiar al usuario odoo
 USER odoo
 
-# Comando por defecto
-CMD ["/start.sh"] 
+# Comando por defecto (usando bash explícitamente)
+CMD ["/bin/bash", "/start.sh"] 
