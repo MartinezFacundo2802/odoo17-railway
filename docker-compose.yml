@@ -3,8 +3,6 @@ version: '3.8'
 services:
   web:
     build: .
-    depends_on:
-      - db
     ports:
       - "8069:8069"
     volumes:
@@ -12,24 +10,14 @@ services:
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
     environment:
-      - HOST=${DB_HOST}
-      - USER=${DB_USER}
-      - PASSWORD=${DB_PASSWORD}
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-
-  db:
-    image: postgres:15
-    environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-    volumes:
-      - odoo-db-data:/var/lib/postgresql/data
+      - HOST=${PGHOST}
+      - USER=${PGUSER}
+      - PASSWORD=${PGPASSWORD}
+      - DB_HOST=${PGHOST}
+      - DB_PORT=${PGPORT}
+      - DB_NAME=${PGDATABASE}
+      - DB_USER=${PGUSER}
+      - DB_PASSWORD=${PGPASSWORD}
 
 volumes:
-  odoo-web-data:
-  odoo-db-data: 
+  odoo-web-data: 
