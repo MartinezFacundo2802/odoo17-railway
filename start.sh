@@ -18,5 +18,9 @@ db_name = ${DB_NAME}
 sslmode = require
 EOF
 
+# Asegurar permisos correctos
+chown odoo:odoo /etc/odoo/odoo.conf
+chmod 644 /etc/odoo/odoo.conf
+
 # Iniciar Odoo
 exec odoo -c /etc/odoo/odoo.conf --http-interface=0.0.0.0 --http-port=8069 --no-cron --log-level=debug 
