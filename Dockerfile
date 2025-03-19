@@ -2,6 +2,7 @@ FROM odoo:17
 
 # Copiar archivos de configuración
 COPY config/odoo.conf /etc/odoo/odoo.conf
+COPY .env /etc/odoo/.env
 
 # Cambiar a root para manejar permisos
 USER root

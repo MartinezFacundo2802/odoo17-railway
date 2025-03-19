@@ -36,4 +36,7 @@ docker-compose.override.yml
 
 # Archivos de sistema
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Variables de entorno
+.env 
