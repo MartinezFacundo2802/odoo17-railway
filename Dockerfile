@@ -22,4 +22,4 @@ EXPOSE 8069
 USER odoo
 
 # Comando por defecto
-CMD ["odoo", "-c", "/etc/odoo/odoo.conf", "--log-level=debug", "--http-interface=0.0.0.0", "--http-port=8069"] 
+CMD ["odoo", "-c", "/etc/odoo/odoo.conf", "--log-level=debug", "--http-interface=0.0.0.0", "--http-port=8069", "--proxy-mode"] 
