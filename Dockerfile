@@ -16,8 +16,5 @@ RUN chmod +x /start.sh
 # Exponer el puerto de Odoo
 EXPOSE 8069
 
-# Volver al usuario odoo
-USER odoo
-
-# Comando por defecto
+# Comando por defecto (ejecutar como root)
 CMD ["/start.sh"] 
