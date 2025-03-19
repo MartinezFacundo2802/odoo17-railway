@@ -4,7 +4,7 @@ dockerfilePath = "./Dockerfile"
 
 [deploy]
 startCommand = "odoo -c /etc/odoo/odoo.conf"
-healthcheckPath = "/web"
-healthcheckTimeout = 300
+healthcheckPath = "/web/login"
+healthcheckTimeout = 600
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10 
