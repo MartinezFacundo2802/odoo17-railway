@@ -27,12 +27,11 @@ sslmode = require
 EOF
 
 # Asegurar permisos correctos
-chown odoo:odoo /etc/odoo/odoo.conf
 chmod 644 /etc/odoo/odoo.conf
 
 # Mostrar el contenido del archivo de configuración (sin la contraseña)
 echo "Contenido del archivo de configuración (sin contraseña):"
 sed 's/password = .*/password = ****/' /etc/odoo/odoo.conf
 
-# Cambiar al usuario odoo y ejecutar Odoo
-exec su - odoo -c "odoo -c /etc/odoo/odoo.conf --http-interface=0.0.0.0 --http-port=8069 --no-cron --log-level=debug --db_host=${DB_HOST} --db_port=${DB_PORT} --db_user=${DB_USER} --db_password=${DB_PASSWORD} --db_name=${DB_NAME} --db_sslmode=require" 
+# Ejecutar Odoo
+exec odoo -c /etc/odoo/odoo.conf --http-interface=0.0.0.0 --http-port=8069 --no-cron --log-level=debug --db_host=${DB_HOST} --db_port=${DB_PORT} --db_user=${DB_USER} --db_password=${DB_PASSWORD} --db_name=${DB_NAME} --db_sslmode=require 

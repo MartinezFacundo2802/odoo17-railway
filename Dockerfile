@@ -11,10 +11,14 @@ RUN mkdir -p /etc/odoo && \
 COPY start.sh /start.sh
 
 # Dar permisos de ejecución al script
-RUN chmod +x /start.sh
+RUN chmod +x /start.sh && \
+    chown odoo:odoo /start.sh
 
 # Exponer el puerto de Odoo
 EXPOSE 8069
 
-# Comando por defecto (ejecutar como root)
+# Cambiar al usuario odoo
+USER odoo
+
+# Comando por defecto
 CMD ["/start.sh"] 
