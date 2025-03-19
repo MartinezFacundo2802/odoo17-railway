@@ -33,5 +33,5 @@ chmod 644 /etc/odoo/odoo.conf
 echo "Contenido del archivo de configuración (sin contraseña):"
 sed 's/password = .*/password = ****/' /etc/odoo/odoo.conf
 
-# Ejecutar Odoo
-exec odoo -c /etc/odoo/odoo.conf --http-interface=0.0.0.0 --http-port=8069 --no-cron --log-level=debug --db_host=${PGHOST} --db_port=${PGPORT} --db_user=${PGUSER} --db_password=${PGPASSWORD} --db_name=${PGDATABASE} --db_sslmode=require 
+# Ejecutar Odoo con el nombre de base de datos explícito
+exec odoo -c /etc/odoo/odoo.conf --http-interface=0.0.0.0 --http-port=8069 --no-cron --log-level=debug --db_host=${PGHOST} --db_port=${PGPORT} --db_user=${PGUSER} --db_password=${PGPASSWORD} --db_name=${PGDATABASE} --db_sslmode=require --database=${PGDATABASE} 
