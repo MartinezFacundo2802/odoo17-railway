@@ -34,5 +34,5 @@ chmod 644 /etc/odoo/odoo.conf
 echo "Contenido del archivo de configuración (sin contraseña):"
 sed 's/password = .*/password = ****/' /etc/odoo/odoo.conf
 
-# Cambiar al usuario odoo
-exec su - odoo -c "odoo -c /etc/odoo/odoo.conf --http-interface=0.0.0.0 --http-port=8069 --no-cron --log-level=debug" 
+# Cambiar al usuario odoo y ejecutar Odoo
+exec su - odoo -c "odoo -c /etc/odoo/odoo.conf --http-interface=0.0.0.0 --http-port=8069 --no-cron --log-level=debug --db_host=${DB_HOST} --db_port=${DB_PORT} --db_user=${DB_USER} --db_password=${DB_PASSWORD} --db_name=${DB_NAME} --db_sslmode=require" 
