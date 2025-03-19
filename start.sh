@@ -19,12 +19,13 @@ echo "PGPORT: ${PGPORT}"
 echo "RAILWAY_PUBLIC_DOMAIN: ${RAILWAY_PUBLIC_DOMAIN}"
 echo "RAILWAY_PRIVATE_DOMAIN: ${RAILWAY_PRIVATE_DOMAIN}"
 
-# Verificar que tenemos todas las variables necesarias
-if [ -z "${PGUSER}" ] || [ "${PGUSER}" = "postgres" ]; then
-    echo "ERROR: PGUSER no está configurado o es 'postgres'"
-    echo "Por favor, configura un usuario diferente en Railway"
-    exit 1
-fi
+# Esperar a que la base de datos esté disponible
+echo "Esperando a que la base de datos esté disponible..."
+while ! nc -z ${PGHOST} ${PGPORT} 2>&1; do 
+    sleep 1
+    echo "Esperando a que la base de datos esté disponible..."
+done
+echo "Base de datos disponible"
 
 # Crear el archivo de configuración dinámicamente
 echo "=== Creando archivo de configuración ==="
@@ -62,4 +63,18 @@ netstat -tulpn | grep 8069 || echo "Puerto 8069 no está en uso"
 
 # Ejecutar Odoo
 echo "=== Iniciando Odoo ==="
-exec odoo -c /etc/odoo/odoo.conf --http-interface=0.0.0.0 --http-port=8069 --no-cron --log-level=debug --db_host=${PGHOST} --db_port=${PGPORT} --db_user=${PGUSER} --db_password=${PGPASSWORD} --db_name=${PGDATABASE} --db_sslmode=require --database=${PGDATABASE} 
+exec odoo -c /etc/odoo/odoo.conf \
+    --http-interface=0.0.0.0 \
+    --http-port=8069 \
+    --no-cron \
+    --log-level=debug \
+    --db_host=${PGHOST} \
+    --db_port=${PGPORT} \
+    --db_user=${PGUSER} \
+    --db_password=${PGPASSWORD} \
+    --db_name=${PGDATABASE} \
+    --db_sslmode=require \
+    --database=${PGDATABASE} \
+    --init=all \
+    --without-demo=True \
+    --proxy-mode 

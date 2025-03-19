@@ -1,7 +1,17 @@
 FROM odoo:17
 
-# Crear directorios necesarios y establecer permisos
+ARG LOCALE=en_US.UTF-8
+
+ENV LANGUAGE=${LOCALE}
+ENV LC_ALL=${LOCALE}
+ENV LANG=${LOCALE}
+
 USER root
+
+RUN apt-get -y update && apt-get install -y --no-install-recommends locales netcat-openbsd \
+    && locale-gen ${LOCALE}
+
+# Crear directorios necesarios y establecer permisos
 RUN mkdir -p /etc/odoo && \
     mkdir -p /var/log/odoo && \
     mkdir -p /var/lib/odoo && \
@@ -22,5 +32,5 @@ EXPOSE 8069
 # Cambiar al usuario odoo
 USER odoo
 
-# Comando por defecto (usando bash explícitamente)
+# Comando por defecto
 CMD ["/bin/bash", "/start.sh"] 
