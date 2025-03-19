@@ -7,6 +7,8 @@ ENV LANGUAGE=${LOCALE}
 ENV LC_ALL=${LOCALE}
 ENV LANG=${LOCALE}
 ENV PYTHONPATH=/usr/lib/python3/dist-packages:/usr/lib/python3/dist-packages/odoo/addons:/mnt/extra-addons
+ENV PYTHON=/usr/bin/python${PYTHON_VERSION}
+ENV PYTHON3=/usr/bin/python${PYTHON_VERSION}
 
 USER root
 
@@ -15,7 +17,9 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
     netcat-openbsd \
     python${PYTHON_VERSION} \
     python3-distutils \
-    && locale-gen ${LOCALE}
+    && locale-gen ${LOCALE} \
+    && ln -sf /usr/bin/python${PYTHON_VERSION} /usr/bin/python3 \
+    && ln -sf /usr/bin/python${PYTHON_VERSION} /usr/bin/python
 
 # Crear directorios necesarios y establecer permisos
 RUN mkdir -p /etc/odoo && \
